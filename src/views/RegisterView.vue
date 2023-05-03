@@ -39,8 +39,6 @@
 </template>
 
 <script>
-import axios from "axios"
-
 export default {
     data() {
         return {
@@ -56,7 +54,6 @@ export default {
                 'email': '',
                 'password': ''
             },
-            token: ''
         }
     },
     methods: {
@@ -68,7 +65,7 @@ export default {
                 'password_confirmation': this.user.password_confirmation
             })
 
-            axios.post(this.$store.state.urlAccessApi + '/register', data, this.$store.state.configApi)
+            this.axios.post(this.$store.state.urlAccessApi + '/register', data)
                 .then((response) => {
                     if (response) {
                         this.registerErrors = {
@@ -85,12 +82,13 @@ export default {
                             'password': this.user.password
                         })
 
-                        axios.post(this.$store.state.urlAccessApi + '/login', data, this.$store.state.configApi)
+                        this.axios.post(this.$store.state.urlAccessApi + '/login', data, this.$store.state.configApi)
                             .then((response) => {
                                 if (response.data.token) {
-                                    this.token = response.data.token
+                                    localStorage.token = response.data.token
+                                    this.$store.state.token = response.data.token
                                     this.msgReturn = "Login efetuado com sucesso!"
-                                    this.$router.push('/') 
+                                    this.$router.push('/')
                                 }
                             })
                     }
@@ -105,12 +103,6 @@ export default {
                         this.msgReturnRegister = "Falha na conexão!"
                     }
                 })
-        }
-    },
-    watch: {
-        token(newToken) {
-            localStorage.token = newToken
-            this.$store.state.token = newToken
         }
     }
 }

@@ -22,28 +22,30 @@
 </template>
 
 <script>
-import axios from "axios"
-
 export default {
     data() {
         return {
             user: {},
             msgReturn: '',
-            token: ''
+        }
+    },
+    created() {
+        if (this.$store.state.token) {
+            this.$router.push('/')
         }
     },
     methods: {
         login() {
-
             let data = new URLSearchParams({
                 'email': this.user.email,
                 'password': this.user.password
             })
 
-            axios.post(this.$store.state.urlAccessApi + '/login', data, this.$store.state.configApi)
+            this.axios.post(this.$store.state.urlAccessApi + '/login', data)
                 .then((response) => {
                     if (response.data.token) {
-                        this.token = response.data.token
+                        localStorage.token = response.data.token
+                        this.$store.state.token = response.data.token
                         this.msgReturn = "Login efetuado com sucesso!"
                         this.$router.push('/')
                     } else {
@@ -62,6 +64,7 @@ export default {
     },
     watch: {
         token(newToken) {
+            console.log(newToken, this.token)
             localStorage.token = newToken
             this.$store.state.token = newToken
         }
