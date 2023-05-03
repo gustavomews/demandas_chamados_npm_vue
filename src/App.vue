@@ -1,9 +1,9 @@
 <template>
   <div id="app">
-    <div class="d-flex align-items-center justify-content-center vh-100">
-      <div id="app-box">
+    <div :class="$route.name == 'login' || $route.name == 'register' ? 'd-flex align-items-center justify-content-center vh-100' : ''">
+      <div :class="$route.name == 'login' || $route.name == 'register' ? 'app-box' : ''">
         {{ /* ////////////////////////////// LOGIN / REGISTER ////////////////////////////// */ }}
-        <template v-if="!$store.state.token || this.$route.name == 'register'">
+        <template v-if="!$store.state.token || $route.name == 'register'">
           <h5 class="mt-3"><i class="fa-solid fa-paperclip"></i> DEMANDAS & CHAMADOS</h5>
           <h6 class="mb-4 text-center">Gestão de Demandas e Chamados</h6>
           <hr class="mb-4">
