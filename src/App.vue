@@ -1,32 +1,31 @@
 <template>
-  <div id="app">
-    <nav>
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </nav>
-    <router-view/>
+  <div id="app" class="d-flex align-items-center justify-content-center vh-100">
+    <div id="loginRegister">
+      <h5 class="mt-3"><i class="fa-solid fa-paperclip"></i> DEMANDAS & CHAMADOS</h5>
+      <h6 class="mb-3 text-center">Gestão de Demandas e Chamados</h6>
+      <hr class="mb-3">
+      <nav class="mb-3">
+        <ul class="nav justify-content-center">
+          <router-link to="/login">
+            <button :class="$route.name == 'login' ? 'nav-link btn nav-login active' : 'nav-link btn'">
+              <i class="fa-solid fa-arrow-right-to-bracket"></i> Acessar
+            </button>
+          </router-link>
+          <router-link to="/register">
+            <button :class="$route.name == 'register' ? 'nav-link btn nav-register active' : 'nav-link btn'">
+              <i class="fa-regular fa-id-card"></i> Registrar
+            </button>
+          </router-link>
+        </ul>
+      </nav>
+      <router-view />
+    </div>
   </div>
 </template>
 
-<style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-
-nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
-}
+<style>
 </style>
+
+<script>
+
+</script>
