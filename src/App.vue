@@ -2,9 +2,9 @@
   <div id="app" class="d-flex align-items-center justify-content-center vh-100">
     <div id="loginRegister">
       <h5 class="mt-3"><i class="fa-solid fa-paperclip"></i> DEMANDAS & CHAMADOS</h5>
-      <h6 class="mb-3 text-center">Gestão de Demandas e Chamados</h6>
-      <hr class="mb-3">
-      <nav class="mb-3">
+      <h6 class="mb-4 text-center">Gestão de Demandas e Chamados</h6>
+      <hr class="mb-4">
+      <nav class="mb-4">
         <ul class="nav justify-content-center">
           <router-link to="/login">
             <button :class="$route.name == 'login' ? 'nav-link btn nav-login active' : 'nav-link btn'">

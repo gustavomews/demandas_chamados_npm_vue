@@ -90,6 +90,7 @@ export default {
                                 if (response.data.token) {
                                     this.token = response.data.token
                                     this.msgReturn = "Login efetuado com sucesso!"
+                                    this.$router.push('/') 
                                 }
                             })
                     }
