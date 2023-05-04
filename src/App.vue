@@ -1,6 +1,7 @@
 <template>
   <div id="app">
-    <div :class="$route.name == 'login' || $route.name == 'register' ? 'd-flex align-items-center justify-content-center vh-100' : ''">
+    <div
+      :class="$route.name == 'login' || $route.name == 'register' ? 'd-flex align-items-center justify-content-center vh-100' : ''">
       <div :class="$route.name == 'login' || $route.name == 'register' ? 'app-box' : ''">
         {{ /* ////////////////////////////// LOGIN / REGISTER ////////////////////////////// */ }}
         <template v-if="!$store.state.token || $route.name == 'register'">
@@ -34,5 +35,13 @@
 
 <script>
 export default {
+  mounted() {
+    if (this.$store.state.token) {
+      this.axios.post(this.$store.state.urlFetchApi + '/me')
+        .then(response => {
+          this.$store.state.name = response.data.name
+        })
+    }
+  }
 }
 </script>

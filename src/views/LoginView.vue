@@ -46,8 +46,12 @@ export default {
                     if (response.data.token) {
                         localStorage.token = response.data.token
                         this.$store.state.token = response.data.token
-                        this.msgReturn = "Login efetuado com sucesso!"
-                        this.$router.push('/')
+                        this.axios.post(this.$store.state.urlFetchApi + '/me')
+                            .then(response => {
+                                this.$store.state.name = response.data.name
+                                this.msgReturn = "Login efetuado com sucesso!"
+                                this.$router.push('/')
+                            })
                     } else {
                         this.msgReturn = response.data.error + '!'
                         document.getElementById('passwordLogin').focus()
@@ -61,13 +65,6 @@ export default {
                     }
                 })
         },
-    },
-    watch: {
-        token(newToken) {
-            console.log(newToken, this.token)
-            localStorage.token = newToken
-            this.$store.state.token = newToken
-        }
     }
 }
 </script>
