@@ -5,7 +5,7 @@ import router from './router'
 import store from './store'
 import "bootstrap/dist/css/bootstrap.min.css"
 import 'bootstrap/dist/js/bootstrap.bundle';
-import './assets/style.css'
+import './assets/css/style.css'
 
 // INTERCEPTORS FROM AXIOS
 import axios from 'axios'
