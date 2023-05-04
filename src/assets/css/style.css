@@ -28,6 +28,30 @@ body {
     background: rgba(0, 0, 0, 0.25);
     box-shadow: 0 0 20px 4px rgba(0, 0, 0, 0.1);
     backdrop-filter: blur(18.1px);
+    margin-bottom: 30px;
+}
+
+.navbar-toggler {
+    border-bottom: 3px solid #fff;
+    border: 0;
+    border-radius: 0;
+    background: rgba(0, 0, 0, 0.25);
+    box-shadow: 0 0 20px 4px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(18.1px);
+    border-bottom: 3px solid #fff;
+    outline: 0;
+}
+
+.navbar-toggler-icon {
+    color: #fff;
+    background-image: var(--fa-font-solid);
+    margin-top: 3px;
+}
+
+.navbar-toggler-icon::before {
+    content: '\f0c9';
+    font: var(--fa-font-solid);
+    font-size: 28px;
 }
 
 .nav-link.active {
@@ -35,6 +59,7 @@ body {
     box-shadow: 0 0 20px 4px rgba(0, 0, 0, 0.1);
     backdrop-filter: blur(18.1px);
     border-bottom: 3px solid #fff;
+    padding: 0.5rem;
 }
 
 .navbar-nav .nav-link.active {
@@ -45,7 +70,9 @@ body {
     color: #fff;
 }
 
+.dropdown-menu,
 .dropdown-menu[data-bs-popper] {
+    position: absolute;
     margin-top: 21px;
     background: rgba(0, 0, 0, 0.25);
     box-shadow: 0 0 20px 4px rgba(0, 0, 0, 0.1);
@@ -53,6 +80,7 @@ body {
     border-radius: 0;
     border: 0;
     border-bottom: 3px solid #fff;
+    animation: fadeIn .4s, fadeOut .4s;
 }
 
 .dropdown-menu-right {
@@ -69,7 +97,8 @@ body {
     background: rgba(0, 0, 0, 0.25);
 }
 
-a, a:hover {
+a,
+a:hover {
     cursor: pointer;
     color: #fff;
     text-decoration: none;
@@ -129,7 +158,7 @@ nav .nav-register {
     border-bottom: 3px solid #fff;
 }
 
-.form-control.error{
+.form-control.error {
     border-bottom: 3px solid #ff4747;
 }
 
@@ -141,4 +170,32 @@ nav .nav-register {
     box-shadow: 0 0 20px 4px rgba(0, 0, 0, 0.1);
     backdrop-filter: blur(18.1px);
     border-bottom: 3px solid #0C77BE;
+}
+
+.card {
+    color: #fff;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: 0 0 20px 4px rgba(0, 0, 0, 0.1);
+}
+
+.card-header {
+    border: 0;
+    border-radius: 0 !important;
+    background: rgba(0, 0, 0, 0.25);
+    backdrop-filter: blur(18.1px);
+}
+
+.card-body {
+    border: 0;
+    background: rgba(0, 0, 0, 0.171);
+    backdrop-filter: blur(23.1px);
+}
+
+.card-footer {
+    border: 0;
+    border-radius: 0 !important;
+    background: rgba(0, 0, 0, 0.25);
+    backdrop-filter: blur(23.1px);
+    text-align: end;
 }
