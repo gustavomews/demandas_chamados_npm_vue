@@ -21,13 +21,8 @@
                         </li>
                     </router-link>
                 </ul>
-                <div class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown">
-                        <i class="fa-solid fa-user"></i> {{ $store.state.name }}
-                    </a>
-                    <ul class="dropdown-menu dropdown-menu-right">
-                        <li><a class="dropdown-item" @click="logout"><i class="fa-solid fa-door-open"></i> Sair</a></li>
-                    </ul>
+                <div class="nav-item">
+                    <a class="nav-link" @click="logout"><i class="fa-solid fa-right-from-bracket"></i> Sair</a>
                 </div>
             </div>
         </div>
