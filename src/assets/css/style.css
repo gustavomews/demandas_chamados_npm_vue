@@ -202,3 +202,12 @@ nav .nav-register {
     backdrop-filter: blur(23.1px);
     text-align: end;
 }
+
+.table {
+    color: #fff;
+    border-color: #919191;
+}
+
+.table-striped>tbody>tr:nth-of-type(odd)>* {
+    color: #fff;
+}
