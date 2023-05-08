@@ -31,7 +31,7 @@
 
 <script>
 export default {
-    name: 'NavBar',
+    name: 'NavbarComponent',
     methods: {
         logout() {
             this.axios.post(this.$store.state.urlFetchApi + '/logout')

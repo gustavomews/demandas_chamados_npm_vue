@@ -47,6 +47,24 @@ axios.interceptors.response.use(
 Vue.prototype.axios = axios
 Vue.config.productionTip = false
 
+//
+Vue.filter('formatDateTime', (d) => {
+  if (!d) return ''
+
+  d = d.split(' ')
+
+  let data = d[0]
+  data = data.split('-')
+  data = data[2] + '/' + data[1] + '/' + data[0]
+
+  let tempo = d[1]
+  tempo = tempo.split('.')
+  tempo = tempo[0]
+
+  return data + ' ' + tempo
+})
+
+
 new Vue({
   router,
   store,
