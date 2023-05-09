@@ -275,25 +275,31 @@ thead>tr {
     border-bottom: 1px solid #ffffff80;
 }
 
-.success {
+.tr-success {
     background: #19875480;
     border-bottom: 1px solid #19875480;
 }
 
-.danger {
+.tr-danger {
     background: #dc354580;
     border-bottom: 1px solid #dc354580;
 }
 
-.info {
+.tr-info {
     background: #0DCAF080;
     border-bottom: 1px solid #0DCAF080;
 }
 
-.warning {
+.tr-warning {
     background: #FFC10780;
     border-bottom: 1px solid #FFC10780;
 }
+
+.tr-default {
+    background: #00000038;
+    border-bottom: 1px solid #00000038;
+}
+
 
 .float-right {
     float: right !important;
