@@ -268,7 +268,7 @@ li.timeline-item::before {
 }
 
 .bg-transparent {
-    background: rgba(0, 0, 0, 0.25) !important;   
+    background: rgba(0, 0, 0, 0.25) !important;
 }
 
 thead>tr {
@@ -293,4 +293,8 @@ thead>tr {
 .warning {
     background: #FFC10780;
     border-bottom: 1px solid #FFC10780;
+}
+
+.float-right {
+    float: right !important;
 }

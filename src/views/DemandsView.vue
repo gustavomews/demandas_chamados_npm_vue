@@ -1,6 +1,7 @@
 <template>
   <div class="demands container" v-if="loaded">
     <Card col="12" title="Demandas" icon="fa-solid fa-list-ul">
+      <button slot="body" class="btn btn-primary float-right mb-2"><i class="fa-solid fa-plus"></i> Nova Demanda</button>
       <Table slot="body" :headers="titles" :data="demands" :buttons="buttons"></Table>
     </Card>
   </div>
