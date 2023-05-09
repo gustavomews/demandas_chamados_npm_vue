@@ -144,13 +144,13 @@ nav .nav-register {
     color: rgb(243, 243, 243);
 }
 
-.btn-primary {
+/*.btn-primary {
     background-image: linear-gradient(to right, #0C77BE 0%, #5490b8 51%, #42a5f5 100%) !important;
 }
 
 .btn-secondary {
     background-image: linear-gradient(to right, #42a5f5 0%, #5490b8 51%, #0C77BE 100%) !important;
-}
+}*/
 
 .form-text {
     color: rgb(0, 0, 0);
@@ -300,7 +300,39 @@ thead>tr {
     border-bottom: 1px solid #00000038;
 }
 
-
 .float-right {
     float: right !important;
+}
+
+.modal-content {
+    background: transparent; 
+    color: #fff;
+    border: 0;
+    border-radius: 0;
+    box-shadow: 0 0 20px 4px rgba(0, 0, 0, 0.1);
+}
+
+.modal-header {
+    border: 0;
+    border-radius: 0;
+    background: rgba(0, 0, 0, 0.25);
+    backdrop-filter: blur(18.1px);
+}
+
+.modal-body {
+    border: 0;
+    background: rgba(0, 0, 0, 0.171);
+    backdrop-filter: blur(23.1px);
+}
+
+.modal-footer {
+    border: 0;
+    border-radius: 0;
+    background: rgba(0, 0, 0, 0.25);
+    backdrop-filter: blur(23.1px);
+    text-align: end;
+}
+
+.modal-backdrop {
+    background: rgba(0, 0, 0, 0.01);
 }

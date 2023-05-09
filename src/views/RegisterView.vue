@@ -30,7 +30,7 @@
                     id="confirmPasswordRegister" v-model="user.password_confirmation">
             </div>
             <div class="d-grid gap-2">
-                <button type="submit" class="btn btn-secondary"><i class="fa-solid fa-share"></i>
+                <button type="submit" class="btn btn-primary"><i class="fa-solid fa-share"></i>
                     Registrar</button>
             </div>
         </form>
