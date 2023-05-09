@@ -26,26 +26,32 @@ axios.interceptors.response.use(
     return response
   },
   error => {
-    //console.log('Falha na resposta', error.response)
-    if (error.response.status == 401 && error.response.data.message == 'Token has expired') {
-      //console.log('Fazer uma nova req para refresh')
+    if (error.response) {
+      if (error.response.status == 401 && error.response.data.message == 'Token has expired') {
+        //console.log('Fazer uma nova req para refresh')
 
-      axios.post('http://127.0.0.1:8000/api/refresh')
-        .then(response => {
-          //console.log('Refresh com sucesso: ', response)
+        axios.post('http://127.0.0.1:8000/api/refresh')
+          .then(response => {
+            //console.log('Refresh com sucesso: ', response)
 
-          localStorage.token = response.data.token
-          store.state.token = response.data.token
-          window.location.reload()
-        })
-        .catch(() => {
-          localStorage.removeItem('token')
-          store.state.token = ''
-          store.state.name = ''
-          router.push('/login')
-        })
+            localStorage.token = response.data.token
+            store.state.token = response.data.token
+            window.location.reload()
+          })
+          .catch(() => {
+            localStorage.removeItem('token')
+            store.state.token = ''
+            store.state.name = ''
+            router.push('/login')
+          })
+      }
+      return Promise.reject(error)
+    } else {
+      localStorage.removeItem('token')
+      store.state.token = ''
+      store.state.name = ''
+      router.push('/')
     }
-    return Promise.reject(error)
   }
 )
 
