@@ -38,6 +38,12 @@ axios.interceptors.response.use(
           store.state.token = response.data.token
           window.location.reload()
         })
+        .catch(() => {
+          localStorage.removeItem('token')
+          store.state.token = ''
+          store.state.name = ''
+          router.push('/login')
+        })
     }
     return Promise.reject(error)
   }

@@ -4,29 +4,30 @@
             <div class="mb-2">
                 <label for="nameRegister" class="form-label"><i class="fa-solid fa-signature"></i>
                     Nome</label>
-                <input type="text" :class="registerErrors.name ? 'form-control error' : 'form-control'" id="nameRegister" aria-describedby="nameHelp" v-model="user.name">
+                <input type="text" :class="registerErrors.name ? 'form-control error' : 'form-control'" id="nameRegister"
+                    aria-describedby="nameHelp" v-model="user.name">
                 <div id="nameHelp" class="form-text" v-html="registerErrors.name"></div>
             </div>
             <div class="mb-2">
                 <label for="emailRegister" class="form-label"><i class="fa-solid fa-envelope"></i>
                     Email</label>
-                <input type="email" :class="registerErrors.email ? 'form-control error' : 'form-control'" id="emailRegister" aria-describedby="emailHelp"
-                    v-model="user.email">
+                <input type="email" :class="registerErrors.email ? 'form-control error' : 'form-control'" id="emailRegister"
+                    aria-describedby="emailHelp" v-model="user.email">
                 <div id="emailHelp" class="form-text" v-html="registerErrors.email"></div>
             </div>
             <div class="mb-2">
                 <label for="passwordRegister" class="form-label"><i class="fa-solid fa-key"></i>
                     Senha</label>
-                <input type="password" :class="registerErrors.password ? 'form-control error' : 'form-control'" id="passwordRegister" aria-describedby="passwordHelp"
-                    v-model="user.password">
+                <input type="password" :class="registerErrors.password ? 'form-control error' : 'form-control'"
+                    id="passwordRegister" aria-describedby="passwordHelp" v-model="user.password">
                 <div id="passwordHelp" class="form-text" v-html="registerErrors.password"></div>
             </div>
             <div class="mb-4">
                 <label for="confirmPasswordRegister" class="form-label">
                     <i class="fa-solid fa-check-double"></i> Confirme a senha
                 </label>
-                <input type="password" :class="registerErrors.password ? 'form-control error' : 'form-control'" id="confirmPasswordRegister"
-                    v-model="user.password_confirmation">
+                <input type="password" :class="registerErrors.password ? 'form-control error' : 'form-control'"
+                    id="confirmPasswordRegister" v-model="user.password_confirmation">
             </div>
             <div class="d-grid gap-2">
                 <button type="submit" class="btn btn-secondary"><i class="fa-solid fa-share"></i>
@@ -87,11 +88,11 @@ export default {
                                 if (response.data.token) {
                                     localStorage.token = response.data.token
                                     this.$store.state.token = response.data.token
+                                    this.msgReturn = "Login efetuado com sucesso!"
+                                    this.$router.push('/')
                                     this.axios.post(this.$store.state.urlFetchApi + '/me')
                                         .then(response => {
                                             this.$store.state.name = response.data.name
-                                            this.msgReturn = "Login efetuado com sucesso!"
-                                            this.$router.push('/')
                                         })
                                 }
                             })

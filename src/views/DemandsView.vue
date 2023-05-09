@@ -1,6 +1,5 @@
 <template>
-  <div class="demands">
-    <Navbar />
+  <div class="demands container" v-if="loaded">
     <Card col="12" title="Demandas" icon="fa-solid fa-list-ul">
       <Table slot="body" :headers="titles" :data="demands" :buttons="buttons"></Table>
     </Card>
@@ -8,24 +7,24 @@
 </template>
 
 <script>
-import Navbar from '../components/Navbar.vue'
 import Card from '../components/Card.vue'
 import Table from '../components/Table.vue'
 
 export default {
   name: 'DemandsView',
   components: {
-    Navbar, Card, Table
+    Card, Table
   },
   data() {
     return {
+      loaded: false,
       demands: [],
       titles: {
         id: { title: 'Número', type: 'text' },
         title: { title: 'Título', type: 'text' },
         datetime_open: { title: 'Abertura', type: 'datetime' },
         user: { title: 'Usuário', type: 'text' },
-        status: { title: 'Status', type: 'text' },
+        status: { title: 'Status', type: 'badge' },
       },
       buttons: {
         view: { title: 'Visualizar', url: '/demand/', col: 'id' },
@@ -39,7 +38,8 @@ export default {
     list() {
       this.axios.get(this.$store.state.urlFetchApi + '/demand')
         .then(response => {
-          this.demands = response.data
+          this.demands = response.data,
+          this.loaded = true
         })
     }
   }

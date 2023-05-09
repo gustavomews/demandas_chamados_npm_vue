@@ -23,12 +23,19 @@ body {
     font-size: 16px;
 }
 
+.container {
+    position: relative;
+    top: 100px;
+}
+
 .navbar {
     color: #fff;
     background: rgba(0, 0, 0, 0.25);
     box-shadow: 0 0 20px 4px rgba(0, 0, 0, 0.1);
     backdrop-filter: blur(18.1px);
-    margin-bottom: 30px;
+    position: fixed;
+    z-index: 9;
+    width: 100%;
 }
 
 .navbar-toggler {
@@ -209,4 +216,81 @@ nav .nav-register {
 
 .table-striped>tbody>tr:nth-of-type(odd)>* {
     color: #fff;
+}
+
+
+/* Timeline holder */
+ul.timeline {
+    list-style-type: none;
+    position: relative;
+    padding-left: 1.5rem;
+}
+
+/* Timeline vertical line */
+ul.timeline:before {
+    content: ' ';
+    background: #343a40;
+    display: inline-block;
+    position: absolute;
+    left: 16px;
+    width: 4px;
+    height: 100%;
+    z-index: 400;
+    border-radius: 1rem;
+}
+
+li.timeline-item {
+    margin: 20px 16px
+}
+
+/* Timeline item arrow */
+.timeline-arrow {
+    border-top: 0.5rem solid transparent;
+    border-right: 0.5rem solid rgba(0, 0, 0, 0.25);
+    border-bottom: 0.5rem solid transparent;
+    display: block;
+    position: absolute;
+    left: 2rem;
+}
+
+/* Timeline item circle marker */
+li.timeline-item::before {
+    content: ' ';
+    background: #343a40;
+    display: inline-block;
+    position: absolute;
+    border-radius: 50%;
+    border: 3px solid #6c757d;
+    left: 11px;
+    width: 14px;
+    height: 14px;
+    z-index: 400;
+}
+
+.bg-transparent {
+    background: rgba(0, 0, 0, 0.25) !important;   
+}
+
+thead>tr {
+    border-bottom: 1px solid #ffffff80;
+}
+
+.success {
+    background: #19875480;
+    border-bottom: 1px solid #19875480;
+}
+
+.danger {
+    background: #dc354580;
+    border-bottom: 1px solid #dc354580;
+}
+
+.info {
+    background: #0DCAF080;
+    border-bottom: 1px solid #0DCAF080;
+}
+
+.warning {
+    background: #FFC10780;
+    border-bottom: 1px solid #FFC10780;
 }

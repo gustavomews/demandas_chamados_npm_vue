@@ -25,6 +25,10 @@ const routes = [
     name: 'demands',
     component: () => import(/* webpackChunkName: "demands" */ '../views/DemandsView.vue')
   },
+  { 
+    path: '/demand/:id', 
+    component: () => import(/* webpackChunkName: "demand" */ '../views/DemandView.vue')
+  },
   {
     path: '/:pathMatch(.*)*',
     component: () => import(/* webpackChunkName: "demands" */ '../views/NotFoundView.vue')

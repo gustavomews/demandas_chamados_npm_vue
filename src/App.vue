@@ -26,7 +26,7 @@
         </nav>
 
         {{ /* ////////////////////////////// APPLICATION ////////////////////////////// */ }}
-
+        <Navbar v-if="$store.state.token" />
         <router-view />
       </div>
     </div>
@@ -34,7 +34,12 @@
 </template>
 
 <script>
+import Navbar from './components/Navbar.vue'
+
 export default {
+  components: {
+    Navbar,
+  },
   mounted() {
     if (this.$store.state.token) {
       this.axios.post(this.$store.state.urlFetchApi + '/me')
