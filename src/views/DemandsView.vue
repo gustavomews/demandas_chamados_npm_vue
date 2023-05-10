@@ -1,21 +1,27 @@
 <template>
   <div class="demands container" v-if="loaded">
     <Card col="12" title="Demandas" icon="fa-solid fa-list-ul">
-      <button slot="body" class="btn btn-primary float-right mb-2" data-bs-toggle="modal" data-bs-target="#newDemand">
-        <i class="fa-solid fa-plus"></i> Nova Demanda
-      </button>
-      <Table slot="body" :headers="titles" :data="demands" :buttons="buttons"></Table>
+      <div slot="body">
+        <button class="btn btn-primary  mb-2" data-bs-toggle="modal" data-bs-target="#newDemand">
+          <i class="fa-solid fa-plus"></i> Nova Demanda
+        </button>
+        <Table :headers="titles" :data="demands" :buttons="buttons"></Table>
+      </div>
     </Card>
     <Modal id="newDemand" title="Nova Demanda" icon="fa-regular fa-newspaper" :functionSave="create">
       <div slot="body">
         <div class="form-group mb-3">
           <label for="titleDemand" class="form-label">Título</label>
-          <input type="text" class="form-control" id="titleDemand" v-model="newDemand.title">
+          <input type="text" aria-describedby="titleHelp" :class="errorsNew.title ? 'form-control error' : 'form-control'"
+            id="titleDemand" v-model="newDemand.title">
+          <div id="titleHelp" class="form-text" v-html="errorsNew.title"></div>
         </div>
         <div class="form-group">
           <label for="descriptionDemand" class="form-label">Descrição</label>
-          <textarea id="descriptionDemand" class="form-control" name="description" maxlength="2000"
+          <textarea id="descriptionDemand" aria-describedby="descriptionHelp"
+            :class="errorsNew.description ? 'form-control error' : 'form-control'" name="description" maxlength="2000"
             v-model="newDemand.description"></textarea>
+          <div id="descriptionHelp" class="form-text" v-html="errorsNew.description"></div>
         </div>
       </div>
     </Modal>
@@ -46,7 +52,14 @@ export default {
       buttons: {
         view: { title: "Visualizar", url: "/demand/", col: "id" },
       },
-      newDemand: {}
+      newDemand: {
+        title: '',
+        description: ''
+      },
+      errorsNew: {
+        title: '',
+        description: ''
+      }
     }
   },
   mounted() {
@@ -73,8 +86,21 @@ export default {
         .then(response => {
           if (response.data) {
             this.list()
-            this.newDemand = {}
+            this.newDemand = {
+              title: '',
+              description: ''
+            }
+            this.errorsNew.title = ''
+            this.errorsNew.description = ''
             document.documentElement.querySelector(".modal.fade.show .btn-close").click()
+          }
+        })
+        .catch(error => {
+          if (error.response.data.errors.title) {
+            this.errorsNew.title = '<i class="fa-solid fa-caret-right"></i> ' + error.response.data.errors.title
+          }
+          if (error.response.data.errors.description) {
+            this.errorsNew.description = '<i class="fa-solid fa-caret-right"></i> ' + error.response.data.errors.description
           }
         })
     }

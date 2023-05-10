@@ -23,7 +23,8 @@
         <div slot="footer" v-if="data.status_id == 1 || data.status_id == 2">
           {{/* Pendente > Permite editar e abrir */ }}
           <template v-if="data.status_id == 1">
-            <button type="button" class="btn btn-secondary">Editar</button>
+            <button type="button" class="btn btn-secondary" @click="loadEdit" data-bs-toggle="modal"
+              data-bs-target="#editDemand">Editar</button>
             <button type="button" class="btn btn-primary ms-2" @click="changeStatus('open')">Abrir</button>
           </template>
           {{/* Em andamento > Permite concluir e cancelar */ }}
@@ -50,20 +51,45 @@
         </div>
       </Card>
     </div>
+    <Modal id="editDemand" title="Editar Demanda" icon="fa-solid fa-newspaper" :functionSave="edit">
+      <div slot="body">
+        <div class="form-group mb-3">
+          <label for="titleDemand" class="form-label">Título</label>
+          <input type="text" aria-describedby="titleHelp"
+            :class="errorsEdit.title ? 'form-control error' : 'form-control'" id="titleDemand" v-model="editDemand.title">
+          <div id="titleHelp" class="form-text" v-html="errorsEdit.title"></div>
+        </div>
+        <div class="form-group">
+          <label for="descriptionDemand" class="form-label">Descrição</label>
+          <textarea id="descriptionDemand" aria-describedby="descriptionHelp"
+            :class="errorsEdit.description ? 'form-control error' : 'form-control'" name="description" maxlength="2000"
+            v-model="editDemand.description"></textarea>
+          <div id="descriptionHelp" class="form-text" v-html="errorsEdit.description"></div>
+        </div>
+      </div>
+    </Modal>
   </div>
 </template>
 
 <script>
 import Card from "../components/Card.vue"
+import Modal from "../components/Modal.vue"
 
 export default {
   components: {
-    Card,
+    Card, Modal
   },
   data() {
     return {
       loaded: false,
       data: [],
+      editDemand: {
+        title: '',
+        description: ''
+      },
+      errorsEdit: {
+        title: ''
+      }
     }
   },
   mounted() {
@@ -82,6 +108,40 @@ export default {
         })
         .catch((error) => {
           console.log(error)
+        })
+    },
+    loadEdit() {
+      this.editDemand.title = this.data.title
+      this.editDemand.description = this.data.description ? this.data.description : ''
+      this.errorsEdit.title = ''
+      this.errorsEdit.description = ''
+    },
+    edit() {
+      let demand = new URLSearchParams({
+        'title': this.editDemand.title,
+        'description': this.editDemand.description,
+        '_method': 'PATCH'
+      })
+      this.axios.post(this.$store.state.urlFetchApi + '/demand/' + this.$route.params.id, demand)
+        .then(response => {
+          if (response.data) {
+            this.list()
+            this.editDemand = {
+              title: '',
+              description: ''
+            }
+            this.errorsEdit.title = ''
+            this.errorsEdit.description = ''
+            document.documentElement.querySelector(".modal.fade.show .btn-close").click()
+          }
+        })
+        .catch(error => {
+          if (error.response.data.errors.title) {
+            this.errorsEdit.title = '<i class="fa-solid fa-caret-right"></i> ' + error.response.data.errors.title
+          }
+          if (error.response.data.errors.description) {
+            this.errorsEdit.description = '<i class="fa-solid fa-caret-right"></i> ' + error.response.data.errors.description
+          }
         })
     },
     changeStatus(status) {
