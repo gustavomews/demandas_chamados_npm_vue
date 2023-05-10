@@ -2,9 +2,11 @@
   <div class="demands container" v-if="loaded">
     <Card col="12" title="Demandas" icon="fa-solid fa-list-ul">
       <div slot="body">
-        <button class="btn btn-primary  mb-2" data-bs-toggle="modal" data-bs-target="#newDemand">
+        <button class="btn btn-primary mb-2 float-right" data-bs-toggle="modal" data-bs-target="#newDemand">
           <i class="fa-solid fa-plus"></i> Nova Demanda
         </button>
+        <br>
+        <br>
         <Table :headers="titles" :data="demands" :buttons="buttons"></Table>
       </div>
     </Card>
