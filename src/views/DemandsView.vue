@@ -9,6 +9,10 @@
         <br>
         <Table :headers="titles" :data="demands" :buttons="buttons"></Table>
       </div>
+
+      <div slot="footer">
+        <Pagination :links="linksPagination" :functionPaginate="paginate"></Pagination>
+      </div>
     </Card>
     <Modal id="newDemand" title="Nova Demanda" icon="fa-regular fa-newspaper" :functionSave="create">
       <div slot="body">
@@ -34,16 +38,18 @@
 import Card from "../components/Card.vue"
 import Table from "../components/Table.vue"
 import Modal from '../components/Modal.vue'
+import Pagination from '../components/Pagination.vue'
 
 export default {
   name: "DemandsView",
   components: {
-    Card, Table, Modal
+    Card, Table, Modal, Pagination
   },
   data() {
     return {
       loaded: false,
       demands: [],
+      page: '?page=1',
       titles: {
         id: { title: "Número", type: "text" },
         title: { title: "Título", type: "text" },
@@ -54,6 +60,7 @@ export default {
       buttons: {
         view: { title: "Visualizar", url: "/demand/", col: "id" },
       },
+      linksPagination: {},
       newDemand: {
         title: '',
         description: ''
@@ -73,11 +80,52 @@ export default {
   },
   methods: {
     list() {
-      this.axios
-        .get(this.$store.state.urlFetchApi + "/demand")
+      this.axios.get(this.$store.state.urlFetchApi + "/demand" + this.page)
         .then((response) => {
-          (this.demands = response.data), (this.loaded = true)
+          this.demands = []
+          this.linksPagination = []
+          //
+
+          // -- set demands
+          for (var i = 0; i < response.data.data.length; i++) {
+            let demand = {
+              id: response.data.data[i].id,
+              title: response.data.data[i].title,
+              datetime_open: response.data.data[i].datetime_open,
+              user: response.data.data[i].user.name,
+              status: response.data.data[i].status.title,
+              status_codename: response.data.data[i].status.codename,
+            }
+            this.demands.push(demand)
+          }
+
+          // -- set links pagination
+          for (var ip = 0; ip < response.data.links.length; ip++) {
+            //
+            let label = response.data.links[ip].label
+            if (ip == 0)
+              label = '<i class="fa-solid fa-chevron-left"></i>'
+            else if (ip == response.data.links.length - 1)
+              label = '<i class="fa-solid fa-chevron-right"></i>'
+
+            //
+            let paging = {
+              active: response.data.links[ip].active,
+              label: label,
+              url: response.data.links[ip].url,
+            }
+            this.linksPagination.push(paging)
+          }
+
+          //
+          this.loaded = true
         })
+    },
+    paginate(l) {
+      if (l.url) {
+        this.page = '?' + l.url.split('?')[1]
+        this.list()
+      }
     },
     create() {
       let demand = new URLSearchParams({
