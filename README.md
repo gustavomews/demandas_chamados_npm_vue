@@ -1,24 +1,8 @@
 # demandas_chamados_npm_vue
 
-## Project setup
+## Utilizar sistema FrontEnd junto da Api disponível no repositório ["api_"](https://github.com/gustavomews/api_demandas_chamados)
 ```
-npm install
-```
-
-### Compiles and hot-reloads for development
-```
+git clone https://github.com/gustavomews/demandas_chamados_npm_vue.git
+npm i
 npm run serve
 ```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
